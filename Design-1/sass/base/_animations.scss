@@ -1,0 +1,59 @@
+// file to store animations
+
+/* animations */
+/* for browser performance only animate opacity and transform */
+@keyframes moveInLeft {
+  /* start time */
+  0% {
+    /* fade in */
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+
+  80% {
+    transform: translateX(1rem);
+  }
+
+  /* end time */
+  100% {
+    opacity: 1;
+    /* end up at original posn */
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInRight {
+  /* start time */
+  0% {
+    /* fade in */
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+
+  80% {
+    transform: translateX(-1rem);
+  }
+
+  /* end time */
+  100% {
+    opacity: 1;
+    /* end up at original posn */
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInBottom {
+  /* start time */
+  0% {
+    /* fade in */
+    opacity: 0;
+    transform: translateY(10rem);
+  }
+
+  /* end time */
+  100% {
+    opacity: 1;
+    /* end up at original posn */
+    transform: translateY(0);
+  }
+}

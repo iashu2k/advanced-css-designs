@@ -1,0 +1,99 @@
+// to store independent components
+/* animated button */
+/*  states order :link — :visited — :hover — :active */
+.btn {
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    /* disable default decorations in a button */
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    /* button is an inline so we want to display it as block. We go for inline-block but that will take whole width. */
+    display: inline-block;
+    border-radius: 10rem;
+    /* another way to animate using transition and states */
+    transition: all 0.2s;
+    /* relative posn for button::after */
+    position: relative;
+    font-size: 1.6rem;
+  }
+
+  &:hover {
+    transform: translateY(-0.3rem);
+    /* x y blur color */
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+  }
+
+  /* when button is clicked */
+  &:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-gray-dark;
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  /* This acts as a pseudo button element which is child to the button element */
+  &::after {
+    /* content and display are required */
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* to send the button back of the actual button */
+    z-index: -1;
+    transition: all 0.2s;
+  }
+
+  /* hover state of pseudo button */
+  &:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+  }
+
+  &--animate {
+    /* last one represents delay */
+    animation: moveInBottom 0.5s ease-out 0.75s;
+    /* since button is visible before animation we use below to set 0 keyframe first then dealay then animation */
+    animation-fill-mode: backwards;
+  }
+}
+
+.btn-text {
+  &,
+  &:link,
+  &:visited {
+    text-decoration: none;
+    color: $color-primary;
+    display: inline-block;
+    border-bottom: 0.1rem solid $color-primary;
+    padding: 1rem;
+    transition: all 0.2s;
+    // change for <button> element
+    border: none;
+    cursor: pointer;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+    transform: translateY(-0.3rem);
+    /* x y blur color */
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+  }
+
+  &:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+}

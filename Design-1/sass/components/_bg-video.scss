@@ -1,0 +1,18 @@
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: 0.2;
+  overflow: hidden; // if child overflows cut it.
+
+  &__content {
+    // take full parent size
+    height: 100%;
+    width: 100%;
+    // works just like bg-size property but for other html elements like - video
+    object-fit: cover;
+  }
+}

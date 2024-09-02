@@ -1,0 +1,41 @@
+// file stores layout components
+
+.header {
+  /* 95% of viewport height */
+  height: 95vh;
+  background-image: linear-gradient(
+      to right,
+      rgba($color-primary, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/hero.jpg);
+  /* fit to width */
+  background-size: cover;
+  /* position set to top which will remain same during screen size change */
+  background-position: top;
+  /* define a polygon shape in clockwise direction x y */
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+  position: relative;
+
+  &__logo-box {
+    /* the position is absolute wrt the parent element marked (header) with position = relative */
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    /* only setting height (which has better control on size) will cause width to be automatically adjusted by the browser */
+    height: 3.5rem;
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    /* shift on x y wrt the elements own width and height */
+    transform: translate(-50%, -50%);
+    /* align all the text to centre */
+    text-align: center;
+  }
+}

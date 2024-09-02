@@ -1,0 +1,236 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+/* universal selector to do a soft reset across all browsers. The box-sizing boder-box means that inside a parent, a child element will calc the total width and height of an element excluding padding and border length.*/
+*,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+  box-sizing: inherit;
+}
+
+html {
+  /* setting root value for rem */
+  /* it is set to 10 for easy conversion from px (just /10) */
+  /* font-size: 10px; */
+
+  /* for user to change font and website being more accessible - write 10px but without pixel as relative to browser default font size i.e 16px so 10/16 = 0.625 */
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  /* stroke thickness */
+  font-weight: 400;
+  /* font-size: 16px; */
+  /* 1.7 times of regular height */
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem;
+  box-sizing: border-box;
+}
+
+.header {
+  /* 95% of viewport height */
+  height: 95vh;
+  background-image: linear-gradient(
+      to right,
+      rgba(126, 213, 111, 0.8),
+      rgba(40, 180, 133, 0.8)
+    ),
+    url(../img/hero.jpg);
+  /* fit to width */
+  background-size: cover;
+  /* position set to top which will remain same during screen size change */
+  background-position: top;
+  /* define a polygon shape in clockwise direction x y */
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+  position: relative;
+}
+
+.header__logo-box {
+  /* the position is absolute wrt the parent element marked (header) with position = relative */
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+}
+
+.header__logo {
+  /* only setting height will cause width to be automatically adjusted by the browser */
+  height: 3.5rem;
+}
+
+.header__text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  /* shift on x y wrt the elements own width and height */
+  transform: translate(-50%, -50%);
+  /* align all the text to centre */
+  text-align: center;
+}
+
+.primary-heading {
+  color: #fff;
+  text-transform: uppercase;
+  /* back part of an element is invisible, used to fix animation shakyness */
+  backface-visibility: hidden;
+  margin-bottom: 6rem;
+}
+
+.heading-primary--main {
+  /* to change the default behaviour of inline and introduce line break */
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  /* variable pace in animation */
+  animation-timing-function: ease-out;
+  /* animation-iteration-count: 2; */
+  /* animation-delay: 3s; */
+}
+
+.heading-primary--sub {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1.75rem;
+
+  animation: moveInRight 1s ease-out;
+}
+
+/* animations */
+/* for browser performance only animate opacity and transform */
+@keyframes moveInLeft {
+  /* start time */
+  0% {
+    /* fade in */
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+
+  80% {
+    transform: translateX(1rem);
+  }
+
+  /* end time */
+  100% {
+    opacity: 1;
+    /* end up at original posn */
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInRight {
+  /* start time */
+  0% {
+    /* fade in */
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+
+  80% {
+    transform: translateX(-1rem);
+  }
+
+  /* end time */
+  100% {
+    opacity: 1;
+    /* end up at original posn */
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInBottom {
+  /* start time */
+  0% {
+    /* fade in */
+    opacity: 0;
+    transform: translateY(10rem);
+  }
+
+  /* end time */
+  100% {
+    opacity: 1;
+    /* end up at original posn */
+    transform: translateY(0);
+  }
+}
+
+/* animated button */
+/*  pseudo class states order :link — :visited — :hover — :active */
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  /* disable default decorations in a button */
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  /* button is an inline so we want to display it as block. We go for inline-block but that will take whole width. */
+  display: inline-block;
+  border-radius: 10rem;
+  /* another way to animate using transition and states */
+  transition: all 0.2s;
+  /* relative posn for button::after */
+  position: relative;
+  font-size: 1.6rem;
+}
+
+.btn:hover {
+  transform: translateY(-0.3rem);
+  /* x y blur color */
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+/* when button is clicked */
+.btn:active {
+  transform: translateY(-0.1rem);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.btn--white {
+  background-color: #fff;
+  color: #777;
+}
+
+/* This acts as a pseudo button element which is child to the button element */
+.btn::after {
+  /* content and display are required */
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 10rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* to send the button back of the actual button */
+  z-index: -1;
+  transition: all 0.2s;
+}
+
+.btn--white::after {
+  background-color: #fff;
+}
+
+/* hover state of pseudo button */
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn--animate {
+  /* last one represents delay */
+  animation: moveInBottom 0.5s ease-out 0.75s;
+  /* since button is visible before animation we use below to set 0 keyframe first then dealay then animation */
+  animation-fill-mode: backwards;
+}
